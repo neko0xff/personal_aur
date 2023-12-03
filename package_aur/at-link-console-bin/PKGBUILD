@@ -4,7 +4,7 @@
 pkgname=at-link-console-bin
 pkgver=3.0.08
 pkgrel=0
-pkgdesc="Artery AT LINK Console 是基於 MCU Bootloader 的命令列程式。"
+pkgdesc="Artery AT-LINK Console 是基於 MCU Bootloader 的命令列程式。"
 arch=('x86_64')
 url="https://www.arterytek.com/cn/product/AT32F423.jsp"
 license=('Commercial')

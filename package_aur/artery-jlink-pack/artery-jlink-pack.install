@@ -1,0 +1,18 @@
+_info() {
+    echo "For the first installation / upgrade please run:"
+    echo "如果是第一次安装或者升級時，請運行："
+    echo "artery-jlink-pack"
+}
+
+post_install() {
+    _info
+}
+
+post_upgrade() {
+    _info
+}
+
+post_remove() {
+    echo "deleting the artery-jlink-pack ..."
+    find /home -maxdepth 5 -name "at32" -exec rm -rf {} \;
+}
