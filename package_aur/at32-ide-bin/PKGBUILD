@@ -11,7 +11,7 @@ license=('Commercial')
 provides=(at32-ide AT32IDE)
 conflicts=()
 replaces=()
-depends=('java-runtime' 'desktop-file-utils' 'gcc' 'hidapi' 'ncurses' 'ncurses5-compat-libs')
+depends=('java-runtime' 'desktop-file-utils' 'gcc' 'hidapi' 'ncurses' 'ncurses5-compat-libs' 'arm-none-eabi-gdb' 'arm-none-eabi-gcc' 'openocd')
 makedepends=('libarchive' 'sed')
 optdepends=('artery-isp-console-bin: Artery ISP Console 是一款基於 MCU Bootloader 的命令列的應用程式。用戶使用時,可以通過 UART 或者 USB 端口配置操作 Artery 的 MCU。'
             'jlink-software-and-documentation: Segger JLink software & documentation pack for Linux')
