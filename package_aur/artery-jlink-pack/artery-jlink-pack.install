@@ -1,7 +1,5 @@
 _info() {
-    echo "For the first installation / upgrade please run:"
-    echo "如果是第一次安装或者升級時，請運行："
-    echo "artery-jlink-pack"
+    echo "For the first installation / upgrade please run: artery-jlink-pack"
 }
 
 post_install() {
