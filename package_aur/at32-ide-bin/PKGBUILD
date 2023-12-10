@@ -20,7 +20,7 @@ options=()
 install=${pkgname}.install
 _pkg_file_name=AT32_IDE_V${pkgver}_Linux-${arch}
 source=("${_pkg_file_name}.zip::https://www.arterytek.com/download/TOOL/AT32_IDE_V${pkgver}_Linux-x86_64.zip")
-sha256sums=('52c080897dd7377513e973da792e6cbc549026026a5684b07b54da8cb474ed19')
+sha256sums=('38fe8e199efc2109a449821d63d94a90ee3dc86242c62d898965d021eaff15ee')
 noextract=()
 
 package() {

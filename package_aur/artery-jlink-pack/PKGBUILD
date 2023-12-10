@@ -5,7 +5,7 @@ pkgname=artery-jlink-pack
 pkgver=2.0.0
 pkgrel=1
 epoch=
-pkgdesc="JLINK Pack 支持雅特力 (Artery) MCU 全系列晶片，在 SEGGER JLink 7.62 及以上版本下的安装。"
+pkgdesc="JLINK Pack 支持 Artery 全系列 MCU，在 SEGGER JLink 7.62 及以上版本下的安装。"
 arch=('any')
 url="https://www.arterytek.com/cn/support/index.jsp?index=0"
 license=('custom' 'Commercial')
