@@ -6,9 +6,9 @@ pkgname=at32-work-bench
 pkgver=1.0.03
 pkgrel=0
 # epoch=1
-pkgdesc="Artery AT32 MCU 圖形化配置軟體，可生成初始化的 C 程式碼"
+pkgdesc="Artery AT32 MCU 圖形化腳位配置軟體(可生成初始化的 C 語言程式碼)"
 arch=('x86_64')
-url="https://www.arterytek.com/cn/product/AT32F423.jsp"
+url="https://www.arterytek.com/en/support/index.jsp"
 license=('Commercial')
 provides=(${pkgname})
 conflicts=()
@@ -16,8 +16,7 @@ replaces=()
 depends=(desktop-file-utils)
 makedepends=(libarchive sed)
 optdepends=('artery-isp-console-bin: Artery ISP Console 是一款基於 MCU Bootloader 的命令列的應用程式。用戶使用時,可以通過 UART 或者 USB 端口配置操作 Artery 的 MCU。'
-            'at32-ide-bin: Artery AT32 IDE 是跨平台 ARM 嵌入式系统的整合開發環境。 它包含一系列的 Eclipse 插件和工具。該插件可使用戶可在 AT32 IDE 下建置和除錯 AT32
-MCU。'
+            'at32-ide-bin: 跨平台 ARM 嵌入式系统的整合開發環境(包含一系列的 Eclipse 插件和工具)，可使用戶方便建置和除錯 AT32 MCU。'
             'jlink-software-and-documentation: Segger JLink software & documentation pack for Linux')
 backup=()
 options=()

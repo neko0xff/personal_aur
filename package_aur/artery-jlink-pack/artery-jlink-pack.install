@@ -1,5 +1,5 @@
 _info() {
-    echo "For the first installation / upgrade please run: artery-jlink-pack"
+    echo "For the first installation & upgrade please run: artery-jlink-pack"
 }
 
 post_install() {
