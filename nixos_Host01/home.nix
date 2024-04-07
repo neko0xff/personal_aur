@@ -21,7 +21,7 @@
   # '';
 
   # 设置鼠标指针大小以及字体 DPI（适用于 4K 显示器）
-  #xresources.properties = {
+  # xresources.properties = {
   #  "Xcursor.size" = 16;
   #  "Xft.dpi" = 172;
   #};
@@ -30,16 +30,12 @@
   # 这些软件将仅在当前用户下可用，不会影响系统级别的配置
   # 建议将所有 GUI 软件，以及与 OS 关系不大的 CLI 软件，都通过 home.packages 安装
   home.packages = with pkgs;[
-    # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
-    neofetch
-    htop
-    ansible
-
     # archives
     zip
     xz
     unzip
     p7zip
+    unrar
 
     # utils
     ripgrep # recursively searches directories for a regex pattern
@@ -76,6 +72,8 @@
     nix-output-monitor
 
     # productivity
+    htop
+    neofetch
     glow # markdown previewer in terminal
     iotop # io monitoring
     iftop # network monitoring
@@ -86,6 +84,7 @@
     lsof # list open files
 
     # system tools
+    ansible
     sysstat
     lm_sensors # for `sensors` command
     ethtool
@@ -112,5 +111,28 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  users.defaultUserShell = pkgs.zsh;  # for global user
+  users.users.user.shell = pkgs.zsh; # for a specific user
 
+  # enable zsh and oh my zsh
+  programs = {
+     zsh = {
+        enable = true;
+        autosuggestions.enable = true;
+        zsh-autoenv.enable = true;
+        syntaxHighlighting.enable = true;
+        ohMyZsh = {
+           enable = true;
+          theme = "zsh2000";
+          plugins = [
+             "git"
+             "npm"
+             "history"
+             "node"
+             "rust"
+             "deno"
+          ];
+      };
+    };
+  };
 }
