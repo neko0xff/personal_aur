@@ -1,9 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  # 注意修改这里的用户名与用户目录
-  home.username = "user";
-  home.homeDirectory = "/home/user";
+  # 用户名&用户目录
+  home = {
+    username = "user";
+    homeDirectory = "/home/user";
+  };
 
   # 直接将当前文件夹的配置文件，链接到 Home 目录下的指定位置
   # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
@@ -111,28 +113,5 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  users.defaultUserShell = pkgs.zsh;  # for global user
-  users.users.user.shell = pkgs.zsh; # for a specific user
-
-  # enable zsh and oh my zsh
-  programs = {
-     zsh = {
-        enable = true;
-        autosuggestions.enable = true;
-        zsh-autoenv.enable = true;
-        syntaxHighlighting.enable = true;
-        ohMyZsh = {
-           enable = true;
-          theme = "zsh2000";
-          plugins = [
-             "git"
-             "npm"
-             "history"
-             "node"
-             "rust"
-             "deno"
-          ];
-      };
-    };
-  };
+  
 }

@@ -6,9 +6,13 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ # Include the results
       ./hardware-configuration.nix
-      ./de.nix
+      ./software/de.nix
+      ./software/flatpak.nix
+      ./software/vbox.nix
+      ./lang/fonts.nix
+      ./lang/i18n.nix
     ];
 
   # Bootloader
@@ -23,8 +27,26 @@
 
   # zsh 設置
   users.defaultUserShell = pkgs.zsh;
-  environment.shells = with pkgs; [ zsh ];
-  programs.zsh.enable = true;  
+  environment.shells = with pkgs; [ 
+    zsh 
+  ];
+  # enable zsh and oh my zsh
+  programs.zsh = {
+    enable = true;
+    syntaxHighlighting.enable = true;
+    ohMyZsh = {
+       enable = true;
+       theme = "robbyrussell";
+       plugins = [
+          "git"
+          "npm"
+          "history"
+          "node"
+          "rust"
+          "deno"
+        ];
+     };  
+  };
 
   networking.hostName = "Host01"; # Define your hostname.
   #networking.wireless = {
@@ -43,49 +65,19 @@
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "zh_TW.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "zh_TW.UTF-8";
-      LC_IDENTIFICATION = "zh_TW.UTF-8";
-      LC_MEASUREMENT = "zh_TW.UTF-8";
-      LC_MONETARY = "zh_TW.UTF-8";
-      LC_NAME = "zh_TW.UTF-8";
-      LC_NUMERIC = "zh_TW.UTF-8";
-      LC_PAPER = "zh_TW.UTF-8";
-      LC_TELEPHONE = "zh_TW.UTF-8";
-      LC_TIME = "zh_TW.UTF-8";
-    };
-    inputMethod = {
-      # 輸入法: Fcitx5
-      enabled = "fcitx5"; 
-      fcitx5 = {
-         addons = with pkgs; [ 
-            fcitx5-mozc     # 日文
-            fcitx5-chewing  # 注音
-            fcitx5-table-other # 其它輸入法
-            fcitx5-table-extra # 其它輸入法
-            fcitx5-chinese-addons # 簡中輸入
-            fcitx5-m17n
-            fcitx5-configtool # 設置工具
-          ];
-        };
-    };
-  };
+  
   
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    videoDrivers = [ "amdgpu" ];
-    displayManager = {
-      # Enable the KDE Plasma Desktop Environment.
-      sddm.enable = true;
-      plasma5.enable = true;
-    };
+    videoDrivers = [ ];
+    # Enable the KDE Plasma Desktop Environment.
+    displayManager.sddm.enable = true;
+    desktopManager.plasma5.enable = true;  
     # Configure keymap in X11
     layout = "tw";
     xkbVariant = "";
+    libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
   };
   
   # Enable CUPS to print documents.
@@ -107,9 +99,6 @@
     # no need to redefine it in your config for now)
     # media-session.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.user = {
@@ -164,7 +153,7 @@
 
   # Open ports in the firewall Or disable the firewall altogether.
   networking.firewall = {
-    enable = enable;
+    # enable = true;
     # allowedTCPPorts = [ ... ];
     # allowedUDPPorts = [ ... ];
   };
@@ -176,58 +165,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-  
-  # Flatpak 相關設置 
-  services.flatpak.enable = true;
-  xdg.portal = {
-    extraPortals = [ pkgs.xdg-desktop-portal-kde ];
-    config.common.default = "qt";
-  }; 
-
-  # Virtualbox 環境
-  virtualisation.virtualbox.host = {
-    enable = true;
-    enableExtensionPack = true;
-  };
-  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
-
-  # 字體
-  fonts = {
-        enableDefaultPackages = true;
-        fontDir.enable = true;
-        packages = with pkgs; [
-            noto-fonts
-            noto-fonts-cjk-sans
-            noto-fonts-cjk-serif
-            noto-fonts-color-emoji
-            noto-fonts-extra
-            source-code-pro
-            source-han-sans
-            source-han-serif
-            sarasa-gothic
-        ];
-        fontconfig = {
-            defaultFonts = {
-                emoji = [
-                    "Noto Color Emoji"
-                ];
-                monospace = [
-                    "Noto Sans Mono CJK SC"
-                    "Sarasa Mono SC"
-                    "DejaVu Sans Mono"
-                ];
-                sansSerif = [
-                    "Noto Sans CJK SC"
-                    "Source Han Sans SC"
-                    "DejaVu Sans"
-                ];
-                serif = [
-                    "Noto Serif CJK SC"
-                    "Source Han Serif SC"
-                    "DejaVu Serif"
-                ];
-            };
-      };
-   };
 
 }
