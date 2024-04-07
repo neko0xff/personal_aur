@@ -8,6 +8,8 @@
   imports =
     [ # Include the results
       ./hardware-configuration.nix
+      ./env/clean.nix
+      ./env/zsh.nix
       ./software/de.nix
       ./software/flatpak.nix
       ./software/vbox.nix
@@ -23,29 +25,6 @@
     };
     kernelPackages = pkgs.linuxPackages_zen;
     # kernelPackages = pkgs.linuxPackages_latest;
-  };
-
-  # zsh 設置
-  users.defaultUserShell = pkgs.zsh;
-  environment.shells = with pkgs; [ 
-    zsh 
-  ];
-  # enable zsh and oh my zsh
-  programs.zsh = {
-    enable = true;
-    syntaxHighlighting.enable = true;
-    ohMyZsh = {
-       enable = true;
-       theme = "robbyrussell";
-       plugins = [
-          "git"
-          "npm"
-          "history"
-          "node"
-          "rust"
-          "deno"
-        ];
-     };  
   };
 
   networking.hostName = "Host01"; # Define your hostname.
@@ -66,7 +45,6 @@
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
   
-  
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -78,6 +56,15 @@
     layout = "tw";
     xkbVariant = "";
     libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
+  };
+
+  # KDE Wallet Setup
+  security.pam.services = {
+    sddm.enableKwallet = true;
+    kwallet = {
+      name = "kwallet";
+       enableKwallet = true;
+    };
   };
   
   # Enable CUPS to print documents.
@@ -107,6 +94,9 @@
     extraGroups = [ 
       "networkmanager"
       "wheel"
+      "dialout"
+      "docker"
+      "vboxusers"
     ];
     packages = with pkgs; [
       firefox
@@ -129,14 +119,14 @@
   # The Nano editor is also installed by default.
   environment.systemPackages = with pkgs; [
      nodejs
-     virtualbox
      linuxKernel.packages.linux_zen.virtualbox
      git
      wget
      curl
      nettools
      flutter
-     dart  
+     dart
+     android-studio
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
