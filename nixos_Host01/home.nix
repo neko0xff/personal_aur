@@ -1,10 +1,24 @@
 { config, pkgs, ... }:
 
 {
+
+  # This value determines the Home Manager release that your
+  # configuration is compatible with. This helps avoid breakage
+  # when a new Home Manager release introduces backwards
+  # incompatible changes.
+  #
+  # You can update Home Manager without changing this value. See
+  # the Home Manager release notes for a list of state version
+  # changes in each release.
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+  
   # 用户名&用户目录
   home = {
     username = "user";
     homeDirectory = "/home/user";
+    stateVersion = "23.11";
   };
 
   # 直接将当前文件夹的配置文件，链接到 Home 目录下的指定位置
@@ -101,17 +115,4 @@
     userEmail = "neko_0xff@protonmail.com";
   };
 
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "23.11";
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-  
 }
