@@ -127,6 +127,7 @@
      flutter
      dart
      android-studio
+     github-desktop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
