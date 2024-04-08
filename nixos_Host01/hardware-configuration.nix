@@ -14,21 +14,27 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_zen.kernel.override {
+      structuredExtraConfig = with lib.kernel; {
+          SCHED_MUQSS = yes;
+      };
+      ignoreConfigErrors = true;
+    });
+    # kernelPackages = pkgs.linuxPackages_zen;
     # kernelPackages = pkgs.linuxPackages_latest;
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
+    initrd.kernelModules = [ ];
+    initrd.availableKernelModules = [ 
+      "xhci_pci"
+      "ahci"
+      "ohci_pci"
+      "ehci_pci"
+      "usb_storage"
+      "sd_mod"
+      "sr_mod"
+    ];
   };
-  boot.initrd.availableKernelModules = [ 
-    "xhci_pci"
-    "ahci"
-    "ohci_pci"
-    "ehci_pci"
-    "usb_storage"
-    "sd_mod"
-    "sr_mod"
-  ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/002b0d1f-f315-4b21-a33a-adbd38d23959";
