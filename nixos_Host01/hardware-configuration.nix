@@ -14,13 +14,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_zen.kernel.override {
-      structuredExtraConfig = with lib.kernel; {
-          SCHED_MUQSS = yes;
-      };
-      ignoreConfigErrors = true;
-    });
-    # kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_zen;
     # kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
@@ -33,6 +27,19 @@
       "usb_storage"
       "sd_mod"
       "sr_mod"
+    ];
+  };
+
+  nixpkgs = {
+    overlays = [
+      (self: super: {
+        linuxZenWMuQSS = pkgs.linuxPackagesFor (pkgs.linux_zen.kernel.override {
+          structuredExtraConfig = with lib.kernel; {
+            SCHED_MUQSS = yes;
+          };
+          ignoreConfigErrors = true;
+        });
+      })
     ];
   };
 
