@@ -16,6 +16,7 @@
      curl
      nettools
      flutter
+     python3Full
      dart
      android-studio
      github-desktop
