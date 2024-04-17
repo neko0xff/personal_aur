@@ -31,6 +31,7 @@
               users.user = import ./home.nix; # 導入用戶配置
             };      
           }
+          
         ];
       };
     };

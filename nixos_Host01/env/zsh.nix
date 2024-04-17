@@ -24,4 +24,10 @@
      };  
   };
 
+  environment.variables = {
+    CHROME_EXECUTABLE = "/var/lib/flatpak/app/com.google.Chrome/x86_64/stable/active/export/bin/com.google.Chrome";
+    CXX = "clang++";
+  };
+
+
 }
