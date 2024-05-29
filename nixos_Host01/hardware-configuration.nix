@@ -6,6 +6,8 @@
 {
   imports = [
      (modulesPath + "/installer/scan/not-detected.nix")
+     ./hardware/gpu.nix
+     ./hardware/kernel.nix
   ];
 
    # Bootloader
@@ -30,19 +32,6 @@
     ];
   };
 
-  nixpkgs = {
-    overlays = [
-      (self: super: {
-        linuxZenWMuQSS = pkgs.linuxPackagesFor (pkgs.linux_zen.kernel.override {
-          structuredExtraConfig = with lib.kernel; {
-            SCHED_MUQSS = yes;
-          };
-          ignoreConfigErrors = true;
-        });
-      })
-    ];
-  };
-
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/002b0d1f-f315-4b21-a33a-adbd38d23959";
       fsType = "ext4";
@@ -59,20 +48,5 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  # OpenGL Lib: AMD APU
-  hardware.opengl = {
-    # 64位元支援
-    extraPackages = [
-      # rocmPackages.clr.icd
-      pkgs.amdvlk
-    ];
-    # 32位元支援
-    extraPackages32 = [
-      pkgs.driversi686Linux.amdvlk
-    ];
-  }; 
-  
-  environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
 
 }

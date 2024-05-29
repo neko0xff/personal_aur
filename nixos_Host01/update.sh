@@ -6,6 +6,7 @@ cp  home.nix /etc/nixos
 cp  -r lang /etc/nixos
 cp  -r software /etc/nixos
 cp  -r env /etc/nixos
+cp  -r hardware /etc/nixos
 
 echo "Update System"
 nix flake update

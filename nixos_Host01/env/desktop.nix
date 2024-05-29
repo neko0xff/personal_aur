@@ -5,12 +5,20 @@
   services.xserver = {
     enable = true;
     videoDrivers = [ ];
-    # Enable the KDE Plasma Desktop Environment.
-    displayManager.sddm.enable = true;
-    desktopManager.plasma5.enable = true;  
     # Configure keymap in X11
-    layout = "tw";
-    xkbVariant = "";
-    libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
+    xkb.layout = "tw";
+    xkb.variant = "";
   };
+  services.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
+  services.power-profiles-daemon.enable = true;
+  
+  # Enable the KDE Plasma Desktop Environment.
+  services.desktopManager = {
+    plasma6.enable =true;
+  };
+  services.displayManager = { 
+    sddm.enable = true;
+  };
+
+
 }

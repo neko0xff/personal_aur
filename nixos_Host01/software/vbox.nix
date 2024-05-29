@@ -3,8 +3,10 @@
 {
   # Virtualbox 環境
   virtualisation.virtualbox.host = {
-    enable = true;
-    enableExtensionPack = true;
+    enable = false;
+    enableExtensionPack = false;
+    enableHardening = false;
+    addNetworkInterface = false;
   };
   users.extraGroups.vboxusers.members = [ 
     "user"

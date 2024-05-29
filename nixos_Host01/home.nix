@@ -18,7 +18,7 @@
   home = {
     username = "user";
     homeDirectory = "/home/user";
-    stateVersion = "23.11";
+    stateVersion = "24.05";
   };
 
   # 直接将当前文件夹的配置文件，链接到 Home 目录下的指定位置
