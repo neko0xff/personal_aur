@@ -12,6 +12,8 @@
     extraPackages32 = [
       pkgs.driversi686Linux.amdvlk
     ];
+    driSupport = true; # This is already enabled by default
+    driSupport32Bit = true; # For 32 bit applications
   }; 
   
   environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";

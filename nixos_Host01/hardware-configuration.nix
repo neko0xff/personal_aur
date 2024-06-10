@@ -18,7 +18,11 @@
     };
     kernelPackages = pkgs.linuxPackages_zen;
     # kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [ 
+      "kvm-amd"
+      "tun" 
+      "virtio"
+    ];
     extraModulePackages = [ ];
     initrd.kernelModules = [ ];
     initrd.availableKernelModules = [ 

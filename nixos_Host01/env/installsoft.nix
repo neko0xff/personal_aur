@@ -27,5 +27,7 @@
      power-profiles-daemon
      fwupd
      fwupd-efi
+     unixtools.quota
+     smartmontools
   ];
 }
