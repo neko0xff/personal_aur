@@ -7,7 +7,7 @@
   imports = [
      (modulesPath + "/installer/scan/not-detected.nix")
      ./hardware/gpu.nix
-     ./hardware/kernel.nix
+     #./hardware/kernel.nix
   ];
 
    # Bootloader
@@ -16,8 +16,10 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages =  pkgs.linuxPackages_xanmod_stable;
     # kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = pkgs.linuxPackages_zen;
+    # kernelPackages = pkgs.linuxPackages_lqx;
     kernelModules = [ 
       "kvm-amd"
       "tun" 
