@@ -22,5 +22,19 @@
      nettools
      github-desktop
      partition-manager
+     clang
+     # Replace llvmPackages with llvmPackages_X, where X is the latest LLVM version (at the time of writing, 16)
+     llvmPackages.bintools
+     cargo
+     cargo-auditable-cargo-wrapper
+     rustc
+     rustup
+     rustfmt 
+     clippy
+     k3b 
+     dvdplusrwtools
+     cdrtools
+     cdrdao
   ];
+
 }

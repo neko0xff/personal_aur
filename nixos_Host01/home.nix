@@ -106,6 +106,9 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+
+    # other
+    mdbook
   ];
 
   # git Setup
