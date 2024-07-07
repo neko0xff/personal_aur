@@ -11,7 +11,15 @@
     useDHCP = lib.mkDefault true;
     networkmanager.enable = true; # Enable networking
     hostName = "Host01"; # Define your hostname.
+    
+    # Open ports in the firewall Or disable the firewall altogether.
+    firewall = {
+      # enable = true;
+      # allowedTCPPorts = [ ... ];
+      # allowedUDPPorts = [ ... ];
+    };
   };
+
   #networking.wireless = {
   #    enable = true;  # Enables wireless support via wpa_supplicant.
   #    network = {
@@ -22,13 +30,6 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Open ports in the firewall Or disable the firewall altogether.
-  networking.firewall = {
-    # enable = true;
-    # allowedTCPPorts = [ ... ];
-    # allowedUDPPorts = [ ... ];
-  };
 
   # List services that you want to enable:
   # Enable the OpenSSH daemon.

@@ -4,7 +4,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true; # Allow unfree packages
-  environment.variables.EDITOR = "nano";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   programs.partition-manager.enable = true;
   services.dbus.packages = [ 
@@ -13,6 +12,7 @@
 
   # Do not forget to add an editor to edit configuration.nix! 
   # The Nano editor is also installed by default.
+  environment.variables.EDITOR = "nano";
   environment.systemPackages = with pkgs; [
      nodejs
      linuxKernel.packages.linux_xanmod_stable.virtualbox
@@ -23,7 +23,6 @@
      github-desktop
      partition-manager
      clang
-     # Replace llvmPackages with llvmPackages_X, where X is the latest LLVM version (at the time of writing, 16)
      llvmPackages.bintools
      cargo
      cargo-auditable-cargo-wrapper
@@ -35,6 +34,8 @@
      dvdplusrwtools
      cdrtools
      cdrdao
+     # Web: sudo ventoy-web
+     ventoy-full
   ];
 
 }

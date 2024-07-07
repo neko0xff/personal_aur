@@ -6,7 +6,7 @@
 {
   imports = [
      (modulesPath + "/installer/scan/not-detected.nix")
-     ./hardware/gpu.nix
+     ./hardware/gpu_amd.nix
   ];
 
    # Bootloader
