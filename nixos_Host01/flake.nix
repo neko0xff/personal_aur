@@ -1,9 +1,11 @@
 {
   description = "NixOS flake configuration";
+  # home-manager, used for managing user configuration
+  # 將 home-manager 配置為 nixos 的一個 module
+  # 這樣在 nixos-rebuild switch 時，home-manager 配置也會自動部署
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    # home-manager, used for managing user configuration
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       # The `follows` keyword in inputs is used for inheritance.
@@ -16,14 +18,11 @@
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
-      # Host(Host01) Setup
-      Host01 = nixpkgs.lib.nixosSystem {
+      # default
+      nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
            ./configuration.nix
-
-          # 将 home-manager 配置为 nixos 的一个 module
-          # 这样在 nixos-rebuild switch 时，home-manager 配置也会被自动部署
           home-manager.nixosModules.home-manager{
             home-manager = {
               useGlobalPkgs = true;
@@ -31,7 +30,20 @@
               users.user = import ./home.nix; # 導入用戶配置
             };      
           }
-          
+        ];
+      };
+      # Host(Host01) Setup
+      Host01= nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+           ./configuration.nix
+          home-manager.nixosModules.home-manager{
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.user = import ./home.nix; # 導入用戶配置
+            };
+          }
         ];
       };
     };

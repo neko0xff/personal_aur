@@ -37,19 +37,17 @@
     ];
   };
 
+  # 硬碟分區配置
+  # 如果換硬碟，請換掉相對的UUID配置，否則無法進入系統
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/002b0d1f-f315-4b21-a33a-adbd38d23959";
+    { device = "/dev/disk/by-uuid/ee68037b-0687-422d-b42b-dc2b92513bad";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/2AD7-8CC5";
+    { device = "/dev/disk/by-uuid/8032-8A00";
       fsType = "vfat";
     };
-
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/8d17cb32-61d9-45ef-9ffd-815d07a6723d"; }
-    ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
