@@ -9,5 +9,6 @@
       xdg-desktop-portal-gtk
     ];
     config.common.default = "qt";
+  
   };
 }
