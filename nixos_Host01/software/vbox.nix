@@ -9,7 +9,8 @@
     addNetworkInterface = true;
   };
   environment.systemPackages = with pkgs; [
-    #linuxKernel.packages.linux_xanmod_stable.virtualbox
+    # linuxKernel.packages.linux_xanmod_stable.virtualbox
+    # linuxKernel.packages.linux_zen.virtualbox
   ];
   users.extraGroups.vboxusers.members = [ 
     "user"

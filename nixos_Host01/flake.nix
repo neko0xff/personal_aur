@@ -6,6 +6,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       # The `follows` keyword in inputs is used for inheritance.
@@ -16,7 +17,7 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, flake-utils, ... }: {
     nixosConfigurations = {
       # default
       nixos = nixpkgs.lib.nixosSystem {

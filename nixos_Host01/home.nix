@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
 
@@ -19,6 +19,13 @@
     username = "user";
     homeDirectory = "/home/user";
     stateVersion = "24.05";
+    file.".cargo/config.toml" = {
+      text = ''
+        [target.x86_64-unknown-linux-gnu]
+        linker = "${lib.getExe pkgs.llvmPackages.clang}"
+        rustflags = ["-Clink-arg=-fuse-ld=${lib.getExe' pkgs.mold-wrapped "mold"}", "-Ctarget-cpu=native"]
+      '';
+    };
     packages = with pkgs;[
       # archives
       zip

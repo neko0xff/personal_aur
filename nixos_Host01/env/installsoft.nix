@@ -14,6 +14,8 @@
   # The Nano editor is also installed by default.
   environment = {
      variables.EDITOR = "nano";
+     variables.OPENSSL_DIR = "${pkgs.openssl.dev}";
+     variables.PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
      systemPackages = with pkgs; [
       nodejs
       git
@@ -23,18 +25,42 @@
       github-desktop
       partition-manager
       clang
-      llvmPackages.bintools
-      cargo
-      cargo-auditable-cargo-wrapper
-      rustc
-      rustup
-      rustfmt
-      clippy
+      clang-tools
       k3b
       dvdplusrwtools
       cdrtools
       cdrdao
       ventoy-full # Web: sudo ventoy-web
+      vlc
+      # rust
+      cargo-cross
+      cargo-expand
+      cargo-mommy
+      cargo-nextest
+      cargo-auditable-cargo-wrapper
+      rustc
+      rustup-toolchain-install-master
+      rustfmt
+      clippy
+      pkg-config
+      openssl.dev
+      llvmPackages.bintools
+      llvmPackages.libcxxStdenv
+      llvmPackages.libunwind
+      llvmPackages.libcxx
+      llvmPackages.clangUseLLVM
+      llvmPackages.lld
+      llvmPackages.llvm
+      tokei
+      gnumake
+      libiconv
+      zlib
    ];
   };
+
+  #shellHook = ''
+  #  export OPENSSL_DIR=${pkgs.openssl.dev}
+  #  export PKG_CONFIG_PATH=${pkgs.openssl.dev}/lib/pkgconfig
+  #'';
+
 }
