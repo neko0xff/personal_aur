@@ -55,6 +55,8 @@
       gnumake
       libiconv
       zlib
+      flashrom
+      python3Full
    ];
   };
 
