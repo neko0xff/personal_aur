@@ -28,6 +28,8 @@
             fcitx5-m17n
             fcitx5-configtool # 設置工具
           ];
+          waylandFrontend = true;
+          plasma6Support = true;
         };
     };
   };

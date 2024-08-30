@@ -21,6 +21,7 @@
       ./software/embedded.nix
       ./software/vscode.nix
       ./software/androidDev.nix
+      ./software/kvm.nix
       ./lang/fonts.nix
       ./lang/i18n.nix
     ];

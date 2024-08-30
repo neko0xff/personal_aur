@@ -11,4 +11,4 @@ cp  -r hardware /etc/nixos
 echo "Update System"
 nix-channel --update
 nix flake update
-nixos-rebuild switch
+nixos-rebuild switch --show-trace

@@ -32,6 +32,8 @@
       cdrdao
       ventoy-full # Web: sudo ventoy-web
       vlc
+      virt-viewer
+      filezilla
       # rust
       cargo-cross
       cargo-expand
@@ -57,6 +59,7 @@
       zlib
       flashrom
       python3Full
+
    ];
   };
 
