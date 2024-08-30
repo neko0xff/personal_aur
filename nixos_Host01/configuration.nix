@@ -8,6 +8,7 @@
   imports = [ 
       # Include the results
       ./hardware-configuration.nix
+      ./hardware/write_drive.nix
       ./env/clean.nix
       ./env/zsh.nix
       ./env/network.nix
@@ -22,6 +23,7 @@
       ./software/vscode.nix
       ./software/androidDev.nix
       ./software/kvm.nix
+      ./software/rust.nix
       ./lang/fonts.nix
       ./lang/i18n.nix
     ];
