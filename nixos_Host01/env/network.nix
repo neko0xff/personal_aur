@@ -47,4 +47,8 @@
   # Enable CUPS to print documents.
   services.printing.enable = false;
 
+  environment.systemPackages =  with pkgs; [
+    stevenblack-blocklist
+  ];
+
 }

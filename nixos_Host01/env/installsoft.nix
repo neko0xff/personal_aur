@@ -6,8 +6,8 @@
   nixpkgs.config.allowUnfree = true; # Allow unfree packages
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   programs.partition-manager.enable = true;
-  services.dbus.packages = [ 
-    pkgs.libsForQt5.kpmcore
+  services.dbus.packages = with pkgs; [ 
+    libsForQt5.kpmcore
   ];
 
   # Do not forget to add an editor to edit configuration.nix! 
@@ -26,16 +26,10 @@
       partition-manager
       clang
       clang-tools
-      k3b
-      dvdplusrwtools
-      cdrtools
-      cdrdao
-      ventoy-full # Web: sudo ventoy-web
       vlc
       virt-viewer
       filezilla
       gnumake
-      flashrom
       python3Full
       bun
    ];
