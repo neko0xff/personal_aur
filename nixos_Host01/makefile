@@ -1,4 +1,4 @@
-.PHONY: update flatpak_font
+.PHONY: update flatpak_font flathub_installrepo
 all: update
 
 update:
@@ -6,3 +6,6 @@ update:
 
 flatpak_font:
 	sh flatpak_font.sh
+
+flathub_installrepo:
+	sh flathub.sh

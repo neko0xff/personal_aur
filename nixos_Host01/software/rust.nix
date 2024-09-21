@@ -25,6 +25,7 @@
       tokei
       zlib
       libiconv
+      protoc-gen-rust
     ];
   };
 }

@@ -32,6 +32,9 @@
       gnumake
       python3Full
       bun
+      protobuf
+      grpc-tools
+      protoc-gen-grpc-web
    ];
   };
 
