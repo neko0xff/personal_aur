@@ -16,10 +16,13 @@
       LC_TIME = "zh_TW.UTF-8";
     };
     inputMethod = {
-      # 輸入法: Fcitx5
-      enabled = "fcitx5"; 
+      # 輸入法: fcitx5
+      # 自檢指令: fcitx5-diagnose
+      enabled = "fcitx5";
       fcitx5 = {
          addons = with pkgs; [ 
+            fcitx5-gtk
+            kdePackages.fcitx5-with-addons
             fcitx5-mozc     # 日文
             fcitx5-chewing  # 注音
             fcitx5-table-other # 其它輸入法
@@ -30,7 +33,21 @@
           ];
           waylandFrontend = true;
           plasma6Support = true;
-        };
+      };
+        /*ibus.engines = with pkgs.ibus-engines; [
+          anthy
+          m17n
+          cangjie
+          table
+          table-chinese
+        ];*/
     };
   };
+
+  environment.sessionVariables = {
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+  };
+
 }

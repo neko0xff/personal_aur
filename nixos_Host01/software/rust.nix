@@ -26,6 +26,21 @@
       zlib
       libiconv
       protoc-gen-rust
+      # Tauri
+      at-spi2-atk
+      atkmm
+      cairo
+      gdk-pixbuf
+      glib
+      gobject-introspection
+      gobject-introspection.dev
+      gtk3
+      harfbuzz
+      librsvg
+      libsoup_3
+      pango
+      webkitgtk_4_1
+      webkitgtk_4_1.dev
     ];
   };
 }

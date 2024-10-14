@@ -17,8 +17,11 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, flake-utils, ... }: {
-    nixosConfigurations = {
+  outputs = inputs@{ nixpkgs, home-manager, flake-utils, ... }:   
+    let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in {
+      nixosConfigurations = {
       # default
       nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -48,5 +51,25 @@
         ];
       };
     };
+
+      # DevShell configuration
+      devShells.x86_64-linux.default = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          cmake
+          gdb
+          qt6.full
+          qt6.qtbase
+          qtcreator
+          qt6.wrapQtAppsHook
+          makeWrapper
+          bashInteractive
+        ];
+        # Set the environment variables that Qt apps expect
+        shellHook = ''
+          bashdir=$(mktemp -d)
+          makeWrapper "$(type -p bash)" "$bashdir/bash" "''${qtWrapperArgs[@]}"
+          exec "$bashdir/bash"
+        '';
+      };
   };
 }

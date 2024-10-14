@@ -14,8 +14,9 @@
   # The Nano editor is also installed by default.
   environment = {
      variables.EDITOR = "nano";
-     variables.OPENSSL_DIR = "${pkgs.openssl.dev}";
-     variables.PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+     variables.OPENSSL_DIR = "${pkgs.openssl_3_3.dev}";
+     variables.PKG_CONFIG_PATH = "${pkgs.openssl_3_3.dev}/lib/pkgconfig";
+     variables.OPENSSL_STATIC = "1";
      systemPackages = with pkgs; [
       nodejs
       git
@@ -24,8 +25,6 @@
       nettools
       github-desktop
       partition-manager
-      clang
-      clang-tools
       vlc
       virt-viewer
       filezilla
@@ -35,12 +34,37 @@
       protobuf
       grpc-tools
       protoc-gen-grpc-web
+      pkg-config
+      openssl_3_3.dev
+      libressl_3_8
+      perl
+      smartmontools
+      glib
+      cachix
+      qtcreator
+      gdb
+      cmake
+      glibc
+      libcxx
+      gccStdenv
+      gcc-unwrapped
+      makeWrapper
+      bashInteractive
+      libclang
+      clang
+      clang-tools
+      clang_multi
+      esbuild
+      deno
    ];
   };
 
-  #shellHook = ''
-  #  export OPENSSL_DIR=${pkgs.openssl.dev}
-  #  export PKG_CONFIG_PATH=${pkgs.openssl.dev}/lib/pkgconfig
-  #'';
+  /*shellHook = ''
+    export OPENSSL_DIR=${pkgs.openssl_3_3.dev}
+    export PKG_CONFIG_PATH=${pkgs.openssl_3_3.dev}/lib/pkgconfig
+    bashdir=$(mktemp -d)
+    makeWrapper "$(type -p bash)" "$bashdir/bash" "''${qtWrapperArgs[@]}"
+    exec "$bashdir/bash"
+  '';*/
 
 }
