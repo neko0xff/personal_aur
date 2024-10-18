@@ -1,0 +1,193 @@
+services:
+  portainer:
+    image: portainer/portainer-ce
+    restart: always
+    ports:
+      - 8000:8000
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8083:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      PMA_ARBITRARY: 1
+      #PMA_ABSOLUTE_URI: https://127.0.0.1/phpmyadmin
+
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports:
+      - 8084:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: librenms_redis
+    environment:
+      - "TZ=${TZ}"
+    restart: always
+
+  msmtpd:
+    image: crazymax/msmtpd:latest
+    container_name: librenms_msmtpd
+    env_file:
+      - "./msmtpd.env"
+    restart: always
+
+  # debug: `docker compose exec --user librenms librenms php validate.php`
+  librenms:
+    image: librenms/librenms:latest
+    container_name: librenms
+    hostname: librenms
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    ports:
+      - target: 8000
+        published: 8085
+        protocol: tcp
+    depends_on:
+      - redis
+      - msmtpd
+    volumes:
+      - "/opt/librenms:/data"
+    env_file:
+      - "./librenms.env"
+    environment:
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+      - "DB_HOST=${DB_address}"
+      - "DB_PORT=3306"
+      - "DB_NAME=${Librenms_MYSQL_DATABASE}"
+      - "DB_USER=${MYSQL_USER}"
+      - "DB_PASSWORD=${MYSQL_PASSWORD}"
+      - "DB_TIMEOUT=60"
+    restart: always
+
+  # redmine:
+    # image: redmine:alpine
+    # container_name: redmine
+    # ports:
+      #  - 8086:3000
+    # volumes:
+        #   - "/opt/redmine/redmine_file:/home/redmine/data"
+    # environment:
+        # - "REDMINE_DB_MYSQL=${DB_address}"
+        # - "REDMINE_DB_NAME=${Redmine_DB_NAME}"
+        # - "REDMINE_DB_USERNAME=${MYSQL_USER}"
+        # - "REDMINE_DB_PASSWORD=${MYSQL_PASSWORD}"
+        # - "REDMINE_EMAIL=redmine@example.com"
+        # - "SMTP_HOST=smtp.gmail.com"
+        # - "SMTP_PORT= 587"
+        # - "SMTP_USER=<email_account>"
+        # - "SMTP_PASSWORD=<email_password>"
+    #restart: always
+
+  dispatcher:
+    image: librenms/librenms:latest
+    container_name: librenms_dispatcher
+    hostname: librenms-dispatcher
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    depends_on:
+      - librenms
+      - redis
+    volumes:
+      - "/opt/librenms:/data"
+    env_file:
+      - "./librenms.env"
+    environment:
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+      - "DB_HOST=${DB_address}"
+      - "DB_PORT=3306"
+      - "DB_NAME=${Librenms_MYSQL_DATABASE}"
+      - "DB_USER=${MYSQL_USER}"
+      - "DB_PASSWORD=${MYSQL_PASSWORD}"
+      - "DB_TIMEOUT=60"
+      - "DISPATCHER_NODE_ID=dispatcher1"
+      - "SIDECAR_DISPATCHER=1"
+    restart: always
+
+  syslogng:
+    image: librenms/librenms:latest
+    container_name: librenms_syslogng
+    hostname: librenms-syslogng
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    depends_on:
+      - librenms
+      - redis
+    ports:
+      - target: 514
+        published: 514
+        protocol: tcp
+      - target: 514
+        published: 514
+        protocol: udp
+    volumes:
+      - "/opt/librenms:/data"
+    env_file:
+      - "./librenms.env"
+    environment:
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+      - "DB_HOST=${DB_address}"
+      - "DB_PORT=3306"
+      - "DB_NAME=${Librenms_MYSQL_DATABASE}"
+      - "DB_USER=${MYSQL_USER}"
+      - "DB_PASSWORD=${MYSQL_PASSWORD}"
+      - "DB_TIMEOUT=60"
+      - "SIDECAR_SYSLOGNG=1"
+    restart: always
+
+  snmptrapd:
+    image: librenms/librenms:latest
+    container_name: librenms_snmptrapd
+    hostname: librenms-snmptrapd
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    depends_on:
+      - librenms
+      - redis
+    ports:
+      - target: 162
+        published: 162
+        protocol: tcp
+      - target: 162
+        published: 162
+        protocol: udp
+    volumes:
+      - "/opt/librenms:/data"
+    env_file:
+      - "./librenms.env"
+    environment:
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+      - "DB_HOST=${DB_address}"
+      - "DB_PORT=3306"
+      - "DB_NAME=${Librenms_MYSQL_DATABASE}"
+      - "DB_USER=${MYSQL_USER}"
+      - "DB_PASSWORD=${MYSQL_PASSWORD}"
+      - "DB_TIMEOUT=60"
+      - "SIDECAR_SNMPTRAPD=1"
+    restart: always
+
+volumes:
+  portainer_data:
+    external: false
