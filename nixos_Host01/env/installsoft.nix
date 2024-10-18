@@ -18,7 +18,6 @@
      variables.PKG_CONFIG_PATH = "${pkgs.openssl_3_3.dev}/lib/pkgconfig";
      variables.OPENSSL_STATIC = "1";
      systemPackages = with pkgs; [
-      nodejs
       git
       wget
       curl
@@ -30,10 +29,6 @@
       filezilla
       gnumake
       python3Full
-      bun
-      protobuf
-      grpc-tools
-      protoc-gen-grpc-web
       pkg-config
       openssl_3_3.dev
       libressl_3_8
@@ -54,8 +49,6 @@
       clang
       clang-tools
       clang_multi
-      esbuild
-      deno
    ];
   };
 

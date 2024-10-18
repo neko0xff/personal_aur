@@ -24,6 +24,7 @@
       ./software/androidDev.nix
       ./software/kvm.nix
       ./software/rust.nix
+      ./software/webDev.nix
       ./lang/fonts.nix
       ./lang/i18n.nix
     ];
