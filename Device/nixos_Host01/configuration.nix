@@ -9,6 +9,7 @@
       # Include the results
       ./hardware-configuration.nix
       ./hardware/write_drive.nix
+      ./hardware/gpu_amd.nix
       ./env/clean.nix
       ./env/zsh.nix
       ./env/network.nix

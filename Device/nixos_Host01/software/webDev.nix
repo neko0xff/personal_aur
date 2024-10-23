@@ -12,6 +12,8 @@
       grpc-tools
       protoc-gen-grpc-web
       esbuild
+      zap
+      wireshark
     ];
   };
 }
