@@ -40,7 +40,7 @@
   # nix-channel --add https://nixos.org/channels/nixos-24.05 nixos
   
   system = {
-    stateVersion = "24.05";
+    stateVersion = "unstable";
     autoUpgrade ={
       enable = true;
       allowReboot = true;

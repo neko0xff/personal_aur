@@ -49,7 +49,14 @@
       clang
       clang-tools
       clang_multi
+      hddtemp
+      libffi
+      zlib
    ];
+   pathsToLink = [
+      "/include"
+      "/lib"
+    ];
   };
 
   /*shellHook = ''

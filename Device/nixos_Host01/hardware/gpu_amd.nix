@@ -2,7 +2,7 @@
 
 {
    # OpenGL Lib: AMD APU
-  hardware.opengl = {
+  hardware.graphics = {
     # 64位元支援
     extraPackages = [
       # rocmPackages.clr.icd
@@ -12,8 +12,7 @@
     extraPackages32 = [
       pkgs.driversi686Linux.amdvlk
     ];
-    driSupport = true; # This is already enabled by default
-    driSupport32Bit = true; # For 32 bit applications
+    enable32Bit = true; # For 32 bit applications
   }; 
   
   environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";

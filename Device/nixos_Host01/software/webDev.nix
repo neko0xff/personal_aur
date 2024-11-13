@@ -14,6 +14,7 @@
       esbuild
       zap
       wireshark
+      wasm-pack
     ];
   };
 }

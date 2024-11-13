@@ -2,25 +2,30 @@
 
 {
   # Enable sound with pipewire.
-  sound.enable = true;
+  # sound.enable = true;
   hardware.pulseaudio.enable = false;
   users.users.user.extraGroups = [ "audio" ];
-  security.rtkit.enable = true;
-  security.pam.loginLimits = [
-    { domain = "@audio"; item = "memlock"; type = "-"   ; value = "unlimited"; }
-    { domain = "@audio"; item = "rtprio" ; type = "-"   ; value = "99"       ; }
-    { domain = "@audio"; item = "nofile" ; type = "soft"; value = "99999"    ; }
-    { domain = "@audio"; item = "nofile" ; type = "hard"; value = "524288"    ; }
-  ];
-  #environment.etc = {
-  #  "pipewire.conf.d/rt.conf".source = ./pipewire.conf.d/rt.conf;
-  #};
+  security = {
+    rtkit.enable = true;
+    pam.loginLimits = [
+      { domain = "@audio"; item = "memlock"; type = "-"   ; value = "unlimited"; }
+      { domain = "@audio"; item = "rtprio" ; type = "-"   ; value = "99"       ; }
+      { domain = "@audio"; item = "nofile" ; type = "soft"; value = "99999"    ; }
+      { domain = "@audio"; item = "nofile" ; type = "hard"; value = "524288"   ; }
+    ];
+  };
+
+  environment = {
+    systemPackages =  with pkgs; [
+      easyeffects
+      lsp-plugins
+    ];
+    /*etc = {
+      "pipewire.conf.d/rt.conf".source = ./pipewire.conf.d/rt.conf;
+    };*/
+  };
+  
   # musnix.enable = true;
-  environment.systemPackages =  with pkgs; [
-    easyeffects
-  ];
-  
-  
   services.pipewire = {
     enable = true;
     alsa = {

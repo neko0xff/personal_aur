@@ -3,25 +3,31 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      # rust
       cargo-cross
       cargo-expand
       cargo-mommy
       cargo-nextest
       cargo-auditable-cargo-wrapper
+      cargo-outdated
+      rustup
       rustc
       rustup-toolchain-install-master
       rustfmt
       clippy
       pkg-config
       openssl.dev
+      llvmPackages.clang
+      llvmPackages.clangNoLibc
       llvmPackages.bintools
       llvmPackages.libcxxStdenv
+      llvmPackages.clangWithLibcAndBasicRtAndLibcxx
+      llvmPackages.libcxxClang
       llvmPackages.libunwind
       llvmPackages.libcxx
       llvmPackages.clangUseLLVM
       llvmPackages.lld
       llvmPackages.llvm
+      ocamlPackages.ssl
       tokei
       zlib
       libiconv
