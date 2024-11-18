@@ -9,6 +9,7 @@
       # Include the results
       ./hardware-configuration.nix
       ./hardware/write_drive.nix
+      ./hardware/gpu_amd.nix
       ./env/clean.nix
       ./env/zsh.nix
       ./env/network.nix
@@ -24,6 +25,7 @@
       ./software/androidDev.nix
       ./software/kvm.nix
       ./software/rust.nix
+      ./software/webDev.nix
       ./lang/fonts.nix
       ./lang/i18n.nix
     ];
@@ -38,7 +40,7 @@
   # nix-channel --add https://nixos.org/channels/nixos-24.05 nixos
   
   system = {
-    stateVersion = "24.05";
+    stateVersion = "unstable";
     autoUpgrade ={
       enable = true;
       allowReboot = true;

@@ -3,7 +3,7 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      k3b
+      # k3b
       dvdplusrwtools
       cdrtools
       cdrdao
