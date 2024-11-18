@@ -1,0 +1,6 @@
+load database
+  from mysql://master:oitmis@192.168.1.109:3306/noteDB
+  into postgresql://postgres:oitmis@192.168.1.109:5432/noteDB
+  with include drop, create tables, create indexes
+  set work_mem to '16MB', maintenance_work_mem to '64MB'
+  before load do $$ create schema if not exists myschema; $$;

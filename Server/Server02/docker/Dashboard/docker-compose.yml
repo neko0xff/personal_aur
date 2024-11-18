@@ -188,6 +188,24 @@ services:
       - "SIDECAR_SNMPTRAPD=1"
     restart: always
 
+  pgadmin4:
+    container_name: pgadmin4
+    image: dpage/pgadmin4:latest
+    restart: "always"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL: "dev@demo.com"
+      - PGADMIN_DEFAULT_PASSWORD: "oitmis"
+      - PGADMIN_CONFIG_SESSION_EXPIRATION_TIME: 365
+      - PGADMIN_CONFIG_MAX_SESSION_IDLE_TIME: 60
+    volumes:
+      - pgadmin4-data:/var/lib/pgadmin
+    ports:
+      - "8086:80"
+    extra_hosts:
+       - "host.docker.internal:host-gateway"
+
 volumes:
+  pgadmin4-data:
+    external: false
   portainer_data:
     external: false
